@@ -33,10 +33,10 @@ ActiveRecord::Schema[7.1].define(version: 2025_06_05_102939) do
     t.text "description"
     t.integer "price_per_night"
     t.string "property_image_url"
-    t.bigint "users_id", null: false
+    t.bigint "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["users_id"], name: "index_properties_on_users_id"
+    t.index ["user_id"], name: "index_properties_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -53,5 +53,5 @@ ActiveRecord::Schema[7.1].define(version: 2025_06_05_102939) do
 
   add_foreign_key "bookings", "properties", column: "properties_id"
   add_foreign_key "bookings", "users", column: "users_id"
-  add_foreign_key "properties", "users", column: "users_id"
+  add_foreign_key "properties", "users"
 end
