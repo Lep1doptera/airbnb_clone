@@ -9,7 +9,7 @@ class PropertiesController < ApplicationController
 
   def create
     @property = Property.new(property_params)
-    @property.user = current_user # Assuming Devise or current_user exists
+    @property.user = current_user
 
     if @property.save
       redirect_to @property
