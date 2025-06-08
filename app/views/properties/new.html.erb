@@ -1,0 +1,15 @@
+<div class="container">
+  <div class="row justify-content-center m-3 ">
+    <div class="col-md-6 bg-light p-5 shadow-sm">
+      <h2>Add a new property</h2>
+        <%= simple_form_for(@property) do |f| %>
+          <%= f.input :property_address %>
+          <%= f.input :number_of_guests %>
+          <%= f.input :description %>
+          <%= f.input :price_per_night %>
+          <%= f.input :property_image_url %>
+          <%= f.submit "Submit", class: "btn btn-primary"%> <%= link_to "Cancel", properties_path, class: "btn btn-danger" %>
+        <% end %>
+    </div>
+  </div>
+</div>
