@@ -1,6 +1,7 @@
 <div class="m-4">
   <h1> Welcome to Airbnb </h1>
 </div>
+<% unless user_signed_in?%>
   <div class="container mt-5">
     <div class="row ">
       <% @random_properties.each do |property| %>
@@ -19,6 +20,7 @@
   </div>
 
   <div class="text-center mt-4">
-    <button class="btn btn-primary">Check Out More Properties</button>
+    <%= link_to "Check Out More Properties", properties_path, class: "btn btn-primary" %>
   </div>
 </div>
+<%end%>
