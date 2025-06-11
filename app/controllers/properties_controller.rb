@@ -25,7 +25,7 @@ class PropertiesController < ApplicationController
   def destroy
     @property = Property.find(params[:id])
     @property.destroy
-    redirect_to listings_path
+    redirect_to root_path
   end
 
   private
