@@ -3,10 +3,15 @@ class BookingsController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    @bookings = Booking.all
+    @bookings = current_user.bookings.includes(:property)
   end
 
   def show
+    if @booking.user == current_user
+      render "bookings/show"
+    else
+      redirect_to bookings_path, alert: "You are not authorized to view this booking."
+    end
   end
 
   def new
@@ -14,13 +19,15 @@ class BookingsController < ApplicationController
   end
 
   def create
+    @property = Property.find(params[:property_id])
     @booking = Booking.new(booking_params)
+    @booking.property = @property
     @booking.user = current_user
 
     if @booking.save
-      redirect_to @booking
+      redirect_to @property, notice: "Booking pending!"
     else
-      render :new, status: :unprocessable_entity
+      render "properties/show", status: :unprocessable_entity
     end
   end
 
@@ -36,8 +43,12 @@ class BookingsController < ApplicationController
   end
 
   def destroy
-    @booking.destroy
-    redirect_to bookings_path
+    if @booking.user == current_user
+      @booking.destroy
+      redirect_to bookings_path, notice: "Booking canceled successfully."
+    else
+      redirect_to bookings_path, alert: "You are not authorized to cancel this booking."
+    end
   end
 
   private

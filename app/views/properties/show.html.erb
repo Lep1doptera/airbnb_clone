@@ -18,10 +18,12 @@
       </div>
     </div>
 
-    <div class="col-md-4 d-flex">
+    <div class="col-md-4 d-flex" data-controller="toggle">
       <div class="bg-white p-4 shadow-sm rounded w-100 align-self-start">
-        <h5>Book this property</h5>
-        <h1>RENDER FORM</h1>
+          <button data-action="click->toggle#fire" type="button" class="btn btn-primary">Book Now</button>
+        <div data-toggle-target="bookingForm" class="d-none">
+          <%= render "bookings/form" %>
+        </div>
       </div>
     </div>
   </div>
