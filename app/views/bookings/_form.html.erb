@@ -1,0 +1,23 @@
+<%= simple_form_for [@property, @booking], html: { class: "booking-form" } do |f| %>
+  <div class="mb-3">
+    <%= f.input :check_in_date,
+                label: "Check-in",
+                as: :string,
+                input_html: { class: "form-control", data: { controller: "flatpickr" } } %>
+  </div>
+
+  <div class="mb-3">
+    <%= f.input :check_out_date,
+                label: "Check-out",
+                as: :string,
+                input_html: { class: "form-control", data: { controller: "flatpickr" } } %>
+  </div>
+
+  <div class="mb-3">
+    <%= f.input :number_of_guests, label: "Guests", input_html: { class: "form-control" } %>
+  </div>
+
+  <div class="d-grid">
+    <%= f.button :submit, "Book Now", class: "btn btn-primary btn-block" %>
+  </div>
+<% end %>

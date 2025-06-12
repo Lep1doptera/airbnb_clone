@@ -5,6 +5,7 @@ class PropertiesController < ApplicationController
 
   def new
     @property = Property.new
+    @booking = Booking.new
   end
 
   def create
@@ -20,6 +21,7 @@ class PropertiesController < ApplicationController
 
   def show
     @property = Property.find(params[:id])
+    @booking = Booking.new
   end
 
   def destroy
