@@ -1,0 +1,64 @@
+// app/assets/stylesheets/components/_dialog.scss
+
+dialog {
+  padding: 2rem;
+  border: none;
+  border-radius: 12px;
+  max-width: 400px;
+  width: 100%;
+  background-color: #fff;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+  font-family: 'Helvetica Neue', sans-serif;
+  z-index: 1000;
+
+  h5 {
+    margin-top: 0;
+    margin-bottom: 1rem;
+    font-size: 1.25rem;
+    font-weight: 600;
+  }
+
+  p {
+    font-size: 1rem;
+    color: #333;
+  }
+
+  form {
+    display: flex;
+    flex-direction: column;
+
+    input[type="submit"] {
+      margin-top: 1rem;
+      padding: 0.5rem 1rem;
+      background-color: #dc3545;
+      color: #fff;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+
+      &:hover {
+        background-color: darken(#dc3545, 10%);
+      }
+    }
+  }
+
+  button[data-action="dialog#close"] {
+    margin-top: 0.5rem;
+    background-color: transparent;
+    border: none;
+    color: #666;
+    font-size: 0.9rem;
+    text-decoration: underline;
+    cursor: pointer;
+
+    &:hover {
+      color: #000;
+    }
+  }
+}
+
+dialog::backdrop {
+  background-color: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(2px);
+}
