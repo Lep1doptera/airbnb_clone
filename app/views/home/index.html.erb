@@ -23,4 +23,30 @@
     <%= link_to "Check Out More Properties", properties_path, class: "btn btn-primary" %>
   </div>
 </div>
+<% end %>
+
+<% if user_signed_in? %>
+
+  <h5>My House Bookings</h5>
+    <% @bookings.each do |booking| %>
+      <% if booking.property.user_id == current_user.id %>
+        <div data-controller="booking" data-booking-id="<%= booking.id %>">
+          <p>
+            <%= booking.property.property_address %> |
+            <%= booking.user_id %> |
+            <%= booking.check_in_date %> -
+            <%= booking.check_out_date %> |
+            Status: <span data-booking-target="status"><%= booking.booking_status %></span>
+          </p>
+          <select data-action="change->booking#updateStatus" data-booking-target="select">
+            <option value="" disabled <%= "selected" if booking.booking_status.blank? %>>Choose status</option>
+            <option value="pending" <%= "selected" if booking.booking_status == "pending" %>>Pending</option>
+            <option value="confirmed" <%= "selected" if booking.booking_status == "confirmed" %>>Confirmed</option>
+          </select>
+        </div>
+      <% end %>
+    <% end %>
+
+
+
 <%end%>

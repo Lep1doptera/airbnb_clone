@@ -51,6 +51,16 @@ class BookingsController < ApplicationController
     end
   end
 
+  def update_status
+  @booking = Booking.find(params[:id])
+  if @booking.update(booking_status: params[:booking_status])
+    render json: { booking_status: @booking.booking_status }
+  else
+    render json: { error: "Failed to update status" }, status: :unprocessable_entity
+  end
+end
+
+
   private
 
   def set_booking
