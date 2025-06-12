@@ -1,7 +1,61 @@
+
+<% if user_signed_in?%>
+<div class="container mt-4">
+  <div class="row justify-content-center">
+    <div class="col-md-6 text-center">
+      <h2>Your Dashboard</h2>
+    </div>
+  </div>
+
+  <div class="row g-4 justify-content-center mt-3">
+    <%# Render properties owned by current_user %>
+    <div class="col-md-4">
+      <div class="bg-light p-4 shadow-sm rounded">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+          <h4 class="mb-0">My Properties</h4>
+          <%= link_to "Add new Property", new_property_path, class: "btn btn-outline-primary" %>
+        </div>
+        <% if current_user.properties.any? %>
+          <%= render "index_shared", locals: { properties: current_user.properties } %>
+        <% else %>
+          <p>No properties</p>
+        <% end %>
+      </div>
+    </div>
+
+    <%# Other partials %>
+    <div class="col-md-4">
+      <div class="bg-light p-4 shadow-sm rounded">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+          <h4 class="mb-0">My bookings</h4>
+        </div>
+          <%# Render partial here %>
+          <p>partial goes here</p>
+      </div>
+    </div>
+
+     <%# Other partials %>
+    <div class="col-md-4">
+      <div class="bg-light p-4 shadow-sm rounded">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+          <h4 class="mb-0">Booking requests</h4>
+        </div>
+          <%# Render partial here %>
+          <p>partial goes here</p>
+      </div>
+    </div>
+
+
+
+  </div>
+</div>
+
+<%# NOT SIGNED IN %>
+<% else %>
+
 <div class="m-4">
   <h1> Welcome to Airbnb </h1>
 </div>
-<% unless user_signed_in?%>
   <div class="container mt-5">
     <div class="row ">
       <% @random_properties.each do |property| %>
