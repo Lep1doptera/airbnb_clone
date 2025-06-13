@@ -1,0 +1,14 @@
+<% @user_properties.each do |property| %>
+  <div class="p-2 d-flex justify-content-between align-items-center border-bottom">
+    <div>
+      <i class="fa-solid fa-location-pin"></i>
+      <%= link_to property.property_address, property_path(property), class: "text-decoration-none text-dark" %>
+    </div>
+
+    <%= link_to property_path(property),
+      data: { turbo_method: :delete, turbo_confirm: "Are you sure?" },
+      class: "text-danger" do %>
+      <i class="fa-solid fa-trash"></i>
+    <% end %>
+  </div>
+<% end %>
