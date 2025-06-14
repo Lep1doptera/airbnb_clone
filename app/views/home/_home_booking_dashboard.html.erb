@@ -1,5 +1,5 @@
-  <h5>My House Bookings</h5>
-    <% @bookings.each do |booking| %>
+
+    <% @user_property_bookings.each do |booking| %>
       <% if booking.property.user_id == current_user.id %>
         <div data-controller="booking" data-booking-id="<%= booking.id %>">
           <p>
