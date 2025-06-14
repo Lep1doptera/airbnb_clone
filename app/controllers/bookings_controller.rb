@@ -25,7 +25,7 @@ class BookingsController < ApplicationController
     @booking.user = current_user
 
     if @booking.save
-      redirect_to @property, notice: "Booking pending!"
+      redirect_to @property, notice: "Booking pending approval!"
     else
       render "properties/show", status: :unprocessable_entity
     end
@@ -45,7 +45,7 @@ class BookingsController < ApplicationController
   def destroy
     if @booking.user == current_user
       @booking.destroy
-      redirect_to bookings_path, notice: "Booking canceled successfully."
+      redirect_to bookings_path, alert: "Booking canceled successfully."
     else
       redirect_to bookings_path, alert: "You are not authorized to cancel this booking."
     end
