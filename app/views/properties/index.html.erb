@@ -19,7 +19,7 @@
         <div class="card-index h-100 shadow mb-2 rounded overflow-hidden">
           <%= link_to property_path(property) do %>
 
-          <%= image_tag property.property_image_url, alt: "Property image", class: "card-img-top img-fluid rounded-top" %>
+          <%= image_tag property.property_image_url, alt: "Property image", class: "card-img-top img-fluid rounded-top", style: "width: 100%; height: 250px;" %>
 
           <% end %>
           <div style="background-color: #e9ecef;" class="p-3 d-flex flex-column justify-content-between h-100">
