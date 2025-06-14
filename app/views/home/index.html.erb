@@ -38,8 +38,11 @@
   </div>
 
   <div class="row g-4 justify-content-center mt-3">
-    <%# Render properties owned by current_user %>
-    <div class="col-md-4">
+
+    <%# Left Column: My Properties + Booking Requests stacked %>
+    <div class="col-md-4 d-flex flex-column gap-4">
+
+      <%# My Properties %>
       <div class="bg-light p-4 shadow-sm rounded">
         <div class="d-flex justify-content-between align-items-center mb-3">
           <h4 class="mb-0">My Properties</h4>
@@ -51,31 +54,35 @@
           <p>No properties</p>
         <% end %>
       </div>
-    </div>
 
-    <%# Other partials %>
-    <div class="col-md-4">
-      <div class="bg-light p-4 shadow-sm rounded">
-        <div class="d-flex justify-content-between align-items-center mb-3">
-          <h4 class="mb-0">My bookings</h4>
-        </div>
-          <%# Render partial here %>
-          <p>partial goes here</p>
-      </div>
-    </div>
-
-     <%# Other partials %>
-    <div class="col-md-4">
+      <%# Booking Requests %>
       <div class="bg-light p-4 shadow-sm rounded">
         <div class="d-flex justify-content-between align-items-center mb-3">
           <h4 class="mb-0">Booking requests</h4>
         </div>
-          <%# Render partial here %>
-          <p>partial goes here</p>
+        <% if @user_property_bookings.present? %>
+          <%= render "home_booking_dashboard", locals: { bookings: @user_property_bookings } %>
+        <% else %>
+          <p>No pending requests</p>
+        <% end %>
+      </div>
+
+    </div>
+
+    <%# Right Column: My Bookings (wider) %>
+    <div class="col-md-8">
+      <div class="bg-light p-4 shadow-sm rounded h-100">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+          <h4 class="mb-0">My bookings</h4>
+        </div>
+        <% if @user_bookings.any? %>
+          <%= render "bookings_list", locals: { bookings: @user_bookings } %>
+        <% else %>
+          <p>No current bookings</p>
+        <% end %>
       </div>
     </div>
 
   </div>
 </div>
-
 <% end %>
