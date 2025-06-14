@@ -15,16 +15,18 @@
 
   <body>
     <div data-controller="flash-messages" data-flash="<%= JSON.dump(flash.to_a) %>"></div>
-        <nav class="navbar navbar-expand-lg navbar-light bg-primary px-4">
-      <a class="navbar-brand" href="<%= root_path %>">Airbnb</a>
 
-      <div class="ms-auto">
-        <% if user_signed_in? %>
-          <%= link_to 'Logout', destroy_user_session_path, method: :delete, class: 'btn btn-dark' %>
-        <% else %>
-          <%= link_to 'Login', new_user_session_path, class: 'btn btn-outline-dark' %>
-        <% end %>
-      </div>
+      <nav class="navbar navbar-expand-lg navbar-light bg-primary px-4 d-flex justify-content-between align-items-center position-relative">
+        <%= link_to 'Properties', properties_path, class: 'btn btn-dark' %>
+        <a class="navbar-brand fs-2 position-absolute top-50 start-50 translate-middle" href="<%= root_path %>">Airbnb</a>
+
+        <div class="ms-auto">
+          <% if user_signed_in? %>
+            <%= link_to 'Logout', destroy_user_session_path, method: :delete, class: 'btn btn-dark' %>
+          <% else %>
+            <%= link_to 'Login', new_user_session_path, class: 'btn btn-outline-dark' %>
+          <% end %>
+        </div>
     </nav>
 
     <%= yield %>
