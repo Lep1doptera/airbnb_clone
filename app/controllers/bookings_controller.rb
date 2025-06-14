@@ -45,20 +45,20 @@ class BookingsController < ApplicationController
   def destroy
     if @booking.user == current_user
       @booking.destroy
-      redirect_to bookings_path, alert: "Booking canceled successfully."
+      redirect_to root_path, alert: "Booking canceled successfully."
     else
-      redirect_to bookings_path, alert: "You are not authorized to cancel this booking."
+      redirect_to root_path, alert: "You are not authorized to cancel this booking."
     end
   end
 
   def update_status
-  @booking = Booking.find(params[:id])
-  if @booking.update(booking_status: params[:booking_status])
-    render json: { booking_status: @booking.booking_status }
-  else
-    render json: { error: "Failed to update status" }, status: :unprocessable_entity
+    @booking = Booking.find(params[:id])
+    if @booking.update(booking_status: params[:booking_status])
+      render json: { booking_status: @booking.booking_status }
+    else
+      render json: { error: "Failed to update status" }, status: :unprocessable_entity
+    end
   end
-end
 
 
   private
