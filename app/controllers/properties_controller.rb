@@ -1,6 +1,13 @@
 class PropertiesController < ApplicationController
   def index
     @properties = Property.all
+
+    @markers = @properties.geocoded.map do |property|
+      {
+        lat: property.latitude,
+        lng: property.longitude
+      }
+    end
   end
 
   def new
@@ -22,6 +29,11 @@ class PropertiesController < ApplicationController
   def show
     @property = Property.find(params[:id])
     @booking = Booking.new
+
+    @markers = [{
+      lat: @property.latitude,
+      lng: @property.longitude
+    }]
   end
 
   def destroy
