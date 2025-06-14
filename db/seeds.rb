@@ -32,6 +32,8 @@ properties = []
     number_of_guests: Faker::Number.between(from: 1, to: 10),
     description: Faker::Lorem.sentence(word_count: 12),
     price_per_night: Faker::Number.between(from: 50, to: 500),
+    latitude: Faker::Address.latitude,
+    longitude: Faker::Address.longitude,
     property_image_url: Faker::LoremFlickr.image(size: "640x480", search_terms: ['house', 'apartment']),
     user_id: user.id
   )
