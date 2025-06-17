@@ -1,7 +1,9 @@
 class PropertiesController < ApplicationController
   def index
     @properties = Property.all
-
+     if params[:query].present?
+      @properties = @properties.where("property_address ILIKE ?", "%#{params[:query]}%")
+    end
     @markers = @properties.geocoded.map do |property|
       {
         lat: property.latitude,
