@@ -4,7 +4,6 @@ export default class extends Controller {
   static targets = ["status", "select"]
 
   updateStatus(event) {
-    console.log("Dropdown changed!");
     const bookingId = this.element.dataset.bookingId
     const newStatus = event.target.value
 
@@ -19,9 +18,21 @@ export default class extends Controller {
     .then(response => response.json())
     .then(data => {
       this.statusTarget.textContent = data.booking_status
+      this.updateBackgroundClass(data.booking_status)  // Call it here!
     })
     .catch(error => {
       alert("Failed to update status.")
     })
+  }
+
+  updateBackgroundClass(status) {
+    this.element.classList.remove("bg-warning-subtle", "bg-success-subtle", "bg-light")
+    if (status === "pending") {
+      this.element.classList.add("bg-warning-subtle")
+    } else if (status === "confirmed") {
+      this.element.classList.add("bg-success-subtle")
+    } else {
+      this.element.classList.add("bg-light")
+    }
   }
 }

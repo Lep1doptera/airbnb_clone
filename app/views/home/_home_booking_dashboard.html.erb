@@ -1,19 +1,25 @@
-
-    <% @user_property_bookings.each do |booking| %>
-      <% if booking.property.user_id == current_user.id %>
-        <div data-controller="booking" data-booking-id="<%= booking.id %>">
-          <p>
-            <%= booking.property.property_address %> |
-            <%= booking.user_id %> |
-            <%= booking.check_in_date %> -
-            <%= booking.check_out_date %> |
-            Status: <span data-booking-target="status"><%= booking.booking_status %></span>
-          </p>
-          <select data-action="change->booking#updateStatus" data-booking-target="select">
-            <option value="" disabled <%= "selected" if booking.booking_status.blank? %>>Choose status</option>
-            <option value="pending" <%= "selected" if booking.booking_status == "pending" %>>Pending</option>
-            <option value="confirmed" <%= "selected" if booking.booking_status == "confirmed" %>>Confirmed</option>
-          </select>
-        </div>
-      <% end %>
-    <% end %>
+<% @user_property_bookings.each do |booking| %>
+  <% if booking.property.user_id == current_user.id %>
+    <% bg_class =
+      case booking.booking_status
+      when "pending" then "bg-warning-subtle"
+      when "confirmed" then "bg-success-subtle"
+      else "bg-light"
+      end
+    %>
+    <div class="<%= bg_class %> p-3 mb-2 rounded" data-controller="booking" data-booking-id="<%= booking.id %>">
+      <p><%= booking.property.property_address %></p>
+      <p>
+        <%= booking.check_in_date %>
+        <%= booking.check_out_date %> |
+        Status: <span data-booking-target="status"><%= booking.booking_status %></span>
+      </p>
+      <select data-action="change->booking#updateStatus" data-booking-target="select">
+        <option value="" disabled <%= "selected" if booking.booking_status.blank? %>>Choose status</option>
+        <option value="pending" <%= "selected" if booking.booking_status == "pending" %>>Pending</option>
+        <option value="confirmed" <%= "selected" if booking.booking_status == "confirmed" %>>Confirmed</option>
+      </select>
+      <%= link_to 'Delete Booking', booking_path(booking), method: :delete, data: { confirm: 'Are you sure you want to cancel this booking?' }, class: 'btn btn-sm btn-danger' %>
+    </div>
+  <% end %>
+<% end %>
