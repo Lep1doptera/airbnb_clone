@@ -45,9 +45,7 @@ class BookingsController < ApplicationController
 
   require 'debug'
   def destroy
-    binding.break
-    puts("HELLO")
-    if (@booking.user || @booking.property.user) == current_user
+    if @booking.user_id || @booking.property.user_id == current_user.id
       @booking.destroy
       redirect_to root_path, alert: "Booking canceled successfully."
     else
