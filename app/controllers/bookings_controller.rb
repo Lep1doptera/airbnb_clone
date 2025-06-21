@@ -43,7 +43,6 @@ class BookingsController < ApplicationController
     end
   end
 
-  require 'debug'
   def destroy
     if @booking.user_id || @booking.property.user_id == current_user.id
       @booking.destroy
