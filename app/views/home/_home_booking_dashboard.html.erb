@@ -7,7 +7,7 @@
       else "bg-light"
       end
     %>
-    <div class="<%= bg_class %> p-3 mb-2 rounded" data-controller="booking" data-booking-id="<%= booking.id %>">
+    <div class="<%= bg_class %> p-3 mb-2 rounded m-2" data-controller="booking" data-booking-id="<%= booking.id %>">
       <p><%= booking.property.property_address %></p>
       <p>
         <%= booking.check_in_date %>
@@ -19,9 +19,9 @@
         <option value="pending" <%= "selected" if booking.booking_status == "pending" %>>Pending</option>
         <option value="confirmed" <%= "selected" if booking.booking_status == "confirmed" %>>Confirmed</option>
       </select>
-    </div>
-     <%= link_to 'Delete Booking', booking_path(booking),
+      <%= link_to 'Delete Booking', booking_path(booking),
         data: { turbo_method: :delete, turbo_confirm: 'Are you sure?' },
         class: 'btn btn-danger' %>
+    </div>
   <% end %>
 <% end %>
