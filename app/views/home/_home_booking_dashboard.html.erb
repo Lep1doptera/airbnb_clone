@@ -19,7 +19,8 @@
         <option value="pending" <%= "selected" if booking.booking_status == "pending" %>>Pending</option>
         <option value="confirmed" <%= "selected" if booking.booking_status == "confirmed" %>>Confirmed</option>
       </select>
-      <%= link_to 'Delete Booking', booking_path(booking), method: :delete, data: { confirm: 'Are you sure you want to cancel this booking?' }, class: 'btn btn-sm btn-danger' %>
     </div>
+
   <% end %>
+<%= link_to 'Delete Booking', booking_path(booking), method: :delete, data: { confirm: 'Are you sure you want to cancel this booking?' }, class: 'btn btn-sm btn-danger' %>
 <% end %>

@@ -4,6 +4,7 @@ class BookingsController < ApplicationController
 
   def index
     @bookings = current_user.bookings.includes(:property)
+
   end
 
   def show
@@ -42,12 +43,15 @@ class BookingsController < ApplicationController
     end
   end
 
+  require 'debug'
   def destroy
-    if @booking.user == current_user
+    binding.break
+    puts("HELLO")
+    if (@booking.user || @booking.property.user) == current_user
       @booking.destroy
-      redirect_to bookings_path, alert: "Booking canceled successfully."
+      redirect_to root_path, alert: "Booking canceled successfully."
     else
-      redirect_to bookings_path, alert: "You are not authorized to cancel this booking."
+      redirect_to root_path, alert: "You are not authorized to cancel this booking."
     end
   end
 

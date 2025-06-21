@@ -18,7 +18,7 @@ export default class extends Controller {
     .then(response => response.json())
     .then(data => {
       this.statusTarget.textContent = data.booking_status
-      this.updateBackgroundClass(data.booking_status)  // Call it here!
+      this.updateBackgroundClass(data.booking_status)
     })
     .catch(error => {
       alert("Failed to update status.")
