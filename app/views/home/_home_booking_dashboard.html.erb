@@ -14,11 +14,18 @@
         <%= booking.check_out_date %> |
         Status: <span data-booking-target="status"><%= booking.booking_status %></span>
       </p>
-      <select data-action="change->booking#updateStatus" data-booking-target="select">
-        <option value="" disabled <%= "selected" if booking.booking_status.blank? %>>Choose status</option>
-        <option value="pending" <%= "selected" if booking.booking_status == "pending" %>>Pending</option>
-        <option value="confirmed" <%= "selected" if booking.booking_status == "confirmed" %>>Confirmed</option>
-      </select>
+     <select
+          data-action="change->booking#updateStatus"
+          data-booking-target="select"
+          <%= "disabled" if booking.booking_status == "confirmed" %>
+        >
+          <option value="" disabled <%= "selected" if booking.booking_status.blank? %>>Choose status</option>
+          <option value="pending"
+            <%= "selected" if booking.booking_status == "pending" %>
+            <%= "disabled" if booking.booking_status == "confirmed" %>
+          >Pending</option>
+          <option value="confirmed" <%= "selected" if booking.booking_status == "confirmed" %>>Confirmed</option>
+    </select>
     </div>
      <%= link_to 'Delete Booking', booking_path(booking),
         data: { turbo_method: :delete, turbo_confirm: 'Are you sure?' },
